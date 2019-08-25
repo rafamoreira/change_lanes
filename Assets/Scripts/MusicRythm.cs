@@ -5,7 +5,7 @@ using UnityEngine;
 public class MusicRythm : MonoBehaviour
 {
 
-    public Transform musicCube;
+    public Transform[] musicCubes;
 
     void Start ()
 	{
@@ -30,13 +30,11 @@ public class MusicRythm : MonoBehaviour
 		//The spectrum is logarithmically averaged
 		//to 12 bands
 
-		for (int i = 0; i < spectrum.Length; ++i) {
-			Vector3 start = new Vector3 (i, 0, 0);
-            if(i == 3){
-                musicCube.localScale = new Vector3(musicCube.localScale.x, spectrum[i] * 10, musicCube.localScale.z);
-            }
-			Vector3 end = new Vector3 (i, spectrum [i], 0);
-			Debug.DrawLine (start, end);
-		}
+	    for (int i = 0; i < spectrum.Length; ++i) {
+		Vector3 start = new Vector3 (i, 0, 0);
+		musicCubes[i].localScale = new Vector3(musicCubes[i].localScale.x, spectrum[i] * 30, musicCubes[i].localScale.z);
+		Vector3 end = new Vector3 (i, spectrum [i], 0);
+		Debug.DrawLine (start, end);
+	    }
 	}
 }
