@@ -23,9 +23,16 @@ public class MusicSpawner : MonoBehaviour
 
   public List<GameObject> musicList;
 
+  public Transform preRenderedWaveCubes;
+
   // Start is called before the first frame update
   void Start()
   {
+    Transform[] allChildren = preRenderedWaveCubes.GetComponentsInChildren<Transform>();
+    foreach (Transform child in preRenderedWaveCubes) {
+        musicList.Add(child.gameObject);
+    }
+
     InvokeRepeating("SpawnSection", 0f, spawnTimer);
   }
 

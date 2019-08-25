@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -21,39 +22,48 @@ public class GameManager : MonoBehaviour
   }
 
   public bool gameStarted;
+  public bool gameOver;
   float gameCountdown;
 
-  void Awake()
-  {
-    DontDestroyOnLoad(gameObject);
-  }
-
-  void Start(){  
+  void Start(){
     gameStarted = false;
-    gameCountdown = 2f;
+    gameOver = false;
+    gameCountdown = 3;
+    Time.timeScale = 0;
   }
 
   void Update()
   {
-    if(gameCountdown > 0)
+    if (!gameOver)
     {
-      gameCountdown -= Time.deltaTime;
-    }
+      if (gameCountdown > 0)
+      {
+        gameCountdown -= Time.unscaledDeltaTime;
+      }
 
-    if(!gameStarted && gameCountdown <= 0)
-    {
-      StartLevelRoutine();
+      if (gameCountdown <= 0)
+      {
+        StartLevelRoutine();
+      }
+    } else {
+      if(Input.GetKeyDown(KeyCode.R)){
+        SceneManager.LoadScene("SampleScene", LoadSceneMode.Single);
+      }
     }
   }
 
   public void GameOver()
   {
-      Debug.Log("game over");
+    gameOver = true;
+    gameStarted = false;
+    Time.timeScale = 0;
   }
 
   void StartLevelRoutine()
   {
-      gameStarted = true;
+    Time.timeScale = 1;
+    gameOver = false;
+    gameStarted = true;
   }
 }
 
