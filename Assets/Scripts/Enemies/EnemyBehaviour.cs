@@ -15,7 +15,6 @@ public class EnemyBehaviour : MonoBehaviour
     
     void Start() {
         isEnemy = true;        
-        // bonusTimer = 0;
 	rbd = GetComponent<Rigidbody>();
 	player_script = GameObject.Find("Player").GetComponent<PlayerControl>();
     }
@@ -23,33 +22,20 @@ public class EnemyBehaviour : MonoBehaviour
     void Update () {
 	rbd.AddForce(0, 0, speed, ForceMode.Impulse);
 
-	if (player_script.bonus_in_use){
+	if (player_script.bonus_in_use) {
 	    TurnToBonus(4f);
 	} else {
 	    TurnToEnemy();
+	    // Change this to a texture or something that makes more sense
 	    GetComponent<Renderer>().material.SetColor("_Color", Color.red);
 	}
-	
-        // if (bonusTimer >= 0) {
-	//     bonusTimer -= Time.deltaTime;
-	// }
-        // else if (player_script.bonus_in_use) {
-	//     TurnToEnemy();
-	//     GetComponent<Renderer>().material.SetColor("_Color", Color.red);
-	// }
-            
-
-	// // Change status of enemy
-        // if (Input.GetKeyDown("space")) {
-        //     TurnToBonus(4f);
-        // }
     }
 
     public void TurnToBonus(float seconds) {
 	rbd.useGravity = false;
         isEnemy = false;
         myCollider.enabled = false;
-        // bonusTimer = seconds;
+	// Change this to a texture or something that makes more sense
 	GetComponent<Renderer>().material.SetColor("_Color", Color.green);
     }
 
@@ -60,10 +46,10 @@ public class EnemyBehaviour : MonoBehaviour
 
     private void OnTriggerEnter(Collider other) {
         if (other.tag == "Player") {
-            if (isEnemy)
-                other.GetComponent<PlayerHealth>().TakeHit();
-            else
-                other.GetComponent<PlayerScore>().GetBonus();
+            if (player_script.bonus_in_use)
+		other.GetComponent<PlayerScore>().GetBonus();
+            else 
+		other.GetComponent<PlayerHealth>().TakeHit();
 
             Die();
         }
@@ -73,8 +59,7 @@ public class EnemyBehaviour : MonoBehaviour
         Destroy(gameObject);
     }
         void OnCollisionEnter(Collision other) {
-        if (other.gameObject.tag == "Player" || other.gameObject.tag == ("Kill")) {
+        if (other.gameObject.tag == "Player" || other.gameObject.tag == ("Kill")) 
             Destroy(gameObject);
-        }
-}
+	}
 }
