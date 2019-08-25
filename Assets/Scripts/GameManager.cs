@@ -6,65 +6,73 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
 
-  private static GameManager _instance;
+    private static GameManager _instance;
 
-  public static GameManager Instance
-  {
-    get
+    public static GameManager Instance
     {
-      if (_instance == null)
-      {
-        _instance = GameObject.FindObjectOfType<GameManager>();
-      }
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = GameObject.FindObjectOfType<GameManager>();
+            }
 
-      return _instance;
+            return _instance;
+        }
     }
-  }
 
-  public bool gameStarted;
-  public bool gameOver;
-  float gameCountdown;
+    public bool gameStarted;
+    public bool gameOver;
+    float gameCountdown;
 
-  void Start(){
-    gameStarted = false;
-    gameOver = false;
-    gameCountdown = 3;
-    Time.timeScale = 0;
-  }
-
-  void Update()
-  {
-    if (!gameOver)
+    public AudioClip sfx;
+    AudioSource sfxFont;
+    void Start()
     {
-      if (gameCountdown > 0)
-      {
-        gameCountdown -= Time.unscaledDeltaTime;
-      }
-
-      if (gameCountdown <= 0)
-      {
-        StartLevelRoutine();
-      }
-    } else {
-      if(Input.GetKeyDown(KeyCode.R)){
-        SceneManager.LoadScene("SampleScene", LoadSceneMode.Single);
-      }
+        gameStarted = false;
+        gameOver = false;
+        gameCountdown = 3;
+        Time.timeScale = 0;
+        sfxFont = GetComponent<AudioSource>();
     }
-  }
 
-  public void GameOver()
-  {
-    gameOver = true;
-    gameStarted = false;
-    Time.timeScale = 0;
-  }
+    void Update()
+    {
+        if (!gameOver)
+        {
+            if (gameCountdown > 0)
+            {
+                gameCountdown -= Time.unscaledDeltaTime;
+            }
 
-  void StartLevelRoutine()
-  {
-    Time.timeScale = 1;
-    gameOver = false;
-    gameStarted = true;
-  }
+            if (gameCountdown <= 0)
+            {
+                StartLevelRoutine();
+            }
+        }
+        else
+        {
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                SceneManager.LoadScene("Rubens", LoadSceneMode.Single);
+            }
+        }
+    }
+
+    public void GameOver()
+    {
+        sfxFont.PlayOneShot(sfx);
+        gameOver = true;
+        gameStarted = false;
+        Time.timeScale = 0;
+    }
+
+    void StartLevelRoutine()
+    {
+        Time.timeScale = 1;
+        gameOver = false;
+        gameStarted = true;
+    }
 }
 
 

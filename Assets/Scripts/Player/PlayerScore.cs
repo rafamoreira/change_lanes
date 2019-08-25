@@ -7,6 +7,7 @@ public class PlayerScore : MonoBehaviour {
     public int score;
     public float timeToScore;
     public GameObject score_output;
+    [SerializeField] TextMeshProUGUI finalScore;
 
     float timer;
     TextMeshProUGUI text_score;
@@ -19,7 +20,10 @@ public class PlayerScore : MonoBehaviour {
     }
 
     void Update()
-    { 
+    {
+        if (GameManager.Instance.gameOver) {
+            finalScore.text = "Final Score: " + score;
+        }
         if(GameManager.Instance.gameStarted) 
         {
             if (timer <= 0){
@@ -39,6 +43,6 @@ public class PlayerScore : MonoBehaviour {
     public void GetBonus() {
         score += Mathf.RoundToInt(score * 0.1f);
 	score ++;
-
+        
     }
 }
