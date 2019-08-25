@@ -29,12 +29,22 @@ public class MusicRythm : MonoBehaviour
 	{
 		//The spectrum is logarithmically averaged
 		//to 12 bands
+        foreach(GameObject mo in MusicSpawner.Instance.musicList){
+            for (int mli = 0; mli < 2; ++mli){
+                Transform curCubeList = mo.transform.GetChild(mli);
 
-	    for (int i = 0; i < spectrum.Length; ++i) {
-		Vector3 start = new Vector3 (i, 0, 0);
-		musicCubes[i].localScale = new Vector3(musicCubes[i].localScale.x, spectrum[i] * 30, musicCubes[i].localScale.z);
-		Vector3 end = new Vector3 (i, spectrum [i], 0);
-		Debug.DrawLine (start, end);
+                for (int i = 0; i < spectrum.Length; ++i) {
+                    Transform curCube = curCubeList.GetChild(i);
+                    curCube.localScale = new Vector3(curCube.localScale.x, spectrum[i] * 30, curCube.localScale.z);        
+                }
+            }
+            // foreach(Transform tm in mo.transform.getChild(2)){
+            //     Transform mc = tm.getChild(12);
+            //         }
+            //     Vector3 start = new Vector3 (i, 0, 0);
+            //     
+            //     Vector3 end = new Vector3 (i, spectrum [i], 0);
+            //     Debug.DrawLine (start, end);
 	    }
 	}
 }
