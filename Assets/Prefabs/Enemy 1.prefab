@@ -108,7 +108,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEnemy: 0
-  myCollider: {fileID: 8097920916642629999}
+  myCollider: {fileID: 8097920916471070025}
   speed: 2
 --- !u!54 &4624071739529032079
 Rigidbody:
@@ -142,7 +142,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8097920916642629996
 Transform:
   m_ObjectHideFlags: 0
