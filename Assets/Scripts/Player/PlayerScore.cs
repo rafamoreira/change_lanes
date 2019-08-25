@@ -28,7 +28,7 @@ public class PlayerScore : MonoBehaviour {
             }
             else
             {
-                timer = Time.deltaTime;
+                timer -= Time.deltaTime;
             }
         }
     }
