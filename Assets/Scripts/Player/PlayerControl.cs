@@ -41,7 +41,7 @@ public class PlayerControl : MonoBehaviour
     if (bonus_in_use)
     {
       bonusTimer -= Time.deltaTime;
-			text_bonus.text = "Bonus TIME!!!!";
+			text_bonus.text = "BONUS TIME!!!!\n" + System.Math.Round(bonusTimer, 2);
     }
 
     if (timeSinceBonus >= 10)
@@ -54,7 +54,7 @@ public class PlayerControl : MonoBehaviour
       bonusAllowed = false;
 			
 			if (!bonus_in_use)
-				text_bonus.text = "TIME TO BONUS: " + (10 - timeSinceBonus);
+				text_bonus.text = "TIME TO BONUS\n" + System.Math.Round((10 - timeSinceBonus), 2);
     }
 
     if (bonusTimer <= 0)
@@ -87,9 +87,6 @@ public class PlayerControl : MonoBehaviour
         GetCurrentLane(current_lane);
       }
     }
-
-
-
   }
 
 

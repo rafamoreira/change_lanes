@@ -138,7 +138,7 @@ public class AudioProcessor : MonoBehaviour
 	}
 
 	// Update is called once per frame
-	void Update ()
+	void FixedUpdate ()
 	{
 		if (audioSource.isPlaying) {
 			audioSource.GetSpectrumData (spectrum, 0, FFTWindow.BlackmanHarris);
