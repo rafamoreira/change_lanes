@@ -22,35 +22,37 @@ public class EnemyBehaviour : MonoBehaviour
     void Update () {
 	rbd.AddForce(0, 0, speed, ForceMode.Impulse);
 
-	if (player_script.bonus_in_use) {
-	    TurnToBonus(4f);
-	} else {
-	    TurnToEnemy();
-	    // Change this to a texture or something that makes more sense
-	    GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.red);
-	}
+	    if (player_script.bonus_in_use) {
+	        TurnToBonus(4f);
+	    } else {
+	        TurnToEnemy();
+	        // Change this to a texture or something that makes more sense
+	        GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.red);
+	    }
     }
 
     public void TurnToBonus(float seconds) {
 	rbd.useGravity = false;
         isEnemy = false;
-        myCollider.enabled = false;
-	// Change this to a texture or something that makes more sense
-	GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.green);
+	    // Change this to a texture or something that makes more sense
+	    GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.green);
     }
 
     void TurnToEnemy() {
         isEnemy = true;
-        myCollider.enabled = true;
     }
 
     private void OnTriggerEnter(Collider other) {
         if (other.tag == "Player") {
             if (player_script.bonus_in_use)
-		other.GetComponent<PlayerScore>().GetBonus();
-            else 
-		other.GetComponent<PlayerHealth>().TakeHit();
-
+            {
+                other.GetComponent<PlayerScore>().GetBonus();
+                
+            }   
+            else
+            {
+                other.GetComponent<PlayerHealth>().TakeHit();
+            }
             Die();
         }
     }
