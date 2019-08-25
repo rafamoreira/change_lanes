@@ -5,65 +5,76 @@ using UnityEngine;
 public class EnemyBehaviour : MonoBehaviour
 {
     public bool isEnemy;
-    public float bonusTimer;
-
     public Collider myCollider;
-    void Start()
-    {
+    public float speed = 2;
+
+    Rigidbody rbd;
+
+    GameObject Player;
+    PlayerControl player_script;
+    
+    void Start() {
         isEnemy = true;        
-        bonusTimer = 0;
+        // bonusTimer = 0;
+	rbd = GetComponent<Rigidbody>();
+	player_script = GameObject.Find("Player").GetComponent<PlayerControl>();
     }
     
-    void Update ()
-    {
-        if (bonusTimer >= 0) 
-        {
-            bonusTimer -= Time.deltaTime;
-        }
-        else if (!isEnemy) 
-        {
-            TurnToEnemy();
-        }
-        if (Input.GetKeyDown("space"))
-        {
-            TurnToBonus(4f);
-        }
+    void Update () {
+	rbd.AddForce(0, 0, speed, ForceMode.Impulse);
 
+	if (player_script.bonus_in_use){
+	    TurnToBonus(4f);
+	} else {
+	    TurnToEnemy();
+	    GetComponent<Renderer>().material.SetColor("_Color", Color.red);
+	}
+	
+        // if (bonusTimer >= 0) {
+	//     bonusTimer -= Time.deltaTime;
+	// }
+        // else if (player_script.bonus_in_use) {
+	//     TurnToEnemy();
+	//     GetComponent<Renderer>().material.SetColor("_Color", Color.red);
+	// }
+            
+
+	// // Change status of enemy
+        // if (Input.GetKeyDown("space")) {
+        //     TurnToBonus(4f);
+        // }
     }
 
-    public void TurnToBonus(float seconds)
-    {
+    public void TurnToBonus(float seconds) {
+	rbd.useGravity = false;
         isEnemy = false;
         myCollider.enabled = false;
-        bonusTimer = seconds;
+        // bonusTimer = seconds;
+	GetComponent<Renderer>().material.SetColor("_Color", Color.green);
     }
 
-    void TurnToEnemy()
-    {
+    void TurnToEnemy() {
         isEnemy = true;
         myCollider.enabled = true;
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "Player")
-        {
+    private void OnTriggerEnter(Collider other) {
+        if (other.tag == "Player") {
             if (isEnemy)
-            {
                 other.GetComponent<PlayerHealth>().TakeHit();
-            }
             else
-            {
                 other.GetComponent<PlayerScore>().GetBonus();
-            }
 
             Die();
-
         }
     }
 
-    private void Die() 
-    {
+    private void Die() {
         Destroy(gameObject);
     }
+        void OnCollisionEnter(Collision other) {
+        if (other.gameObject.tag == "Player" || other.gameObject.tag == ("Kill")) {
+            Destroy(gameObject);
+        }
+}
 }
