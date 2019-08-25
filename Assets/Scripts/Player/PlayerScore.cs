@@ -5,13 +5,17 @@ using TMPro;
 
 public class PlayerScore : MonoBehaviour {
     public int score;
-<<<<<<< HEAD
     public float timeToScore;
+    public GameObject score_output;
+
     float timer;
+    TextMeshProUGUI text_score;
 
     void Start()
     {
         timer = 0;
+	text_score = score_output.GetComponent<TextMeshProUGUI>();
+	text_score.text = "Score: " + score;
     }
 
     void Update()
@@ -27,15 +31,6 @@ public class PlayerScore : MonoBehaviour {
                 timer = Time.deltaTime;
             }
         }
-    }
-=======
-    public GameObject score_output;
-    TextMeshProUGUI text_score;
->>>>>>> 7202b6d54c2361a17460f6468e38a3583ef6231a
-
-    void Start(){
-	text_score = score_output.GetComponent<TextMeshProUGUI>();
-	text_score.text = "Score: " + score;
     }
     
     public void GetBonus() {
