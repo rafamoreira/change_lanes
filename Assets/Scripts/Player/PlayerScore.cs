@@ -31,12 +31,14 @@ public class PlayerScore : MonoBehaviour {
                 timer -= Time.deltaTime;
             }
         }
+
+
+	    text_score.text = "Score: " + score;
     }
     
     public void GetBonus() {
         score += Mathf.RoundToInt(score * 0.1f);
 	score ++;
 
-	text_score.text = "Score: " + score;
     }
 }
