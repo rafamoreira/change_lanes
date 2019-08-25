@@ -29,20 +29,6 @@ public class EnemyBehaviour : MonoBehaviour
 	    TurnToEnemy();
 	    GetComponent<Renderer>().material.SetColor("_Color", Color.red);
 	}
-	
-        // if (bonusTimer >= 0) {
-	//     bonusTimer -= Time.deltaTime;
-	// }
-        // else if (player_script.bonus_in_use) {
-	//     TurnToEnemy();
-	//     GetComponent<Renderer>().material.SetColor("_Color", Color.red);
-	// }
-            
-
-	// // Change status of enemy
-        // if (Input.GetKeyDown("space")) {
-        //     TurnToBonus(4f);
-        // }
     }
 
     public void TurnToBonus(float seconds) {
@@ -73,8 +59,7 @@ public class EnemyBehaviour : MonoBehaviour
         Destroy(gameObject);
     }
         void OnCollisionEnter(Collision other) {
-        if (other.gameObject.tag == "Player" || other.gameObject.tag == ("Kill")) {
+        if (other.gameObject.tag == "Player" || other.gameObject.tag == ("Kill")) 
             Destroy(gameObject);
-        }
-}
+	}
 }
