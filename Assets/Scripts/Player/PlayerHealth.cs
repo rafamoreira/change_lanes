@@ -19,5 +19,4 @@ public class PlayerHealth : MonoBehaviour
 	   isAlive = false;
         }
     }
-
 }

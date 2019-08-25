@@ -15,7 +15,6 @@ public class EnemyBehaviour : MonoBehaviour
     
     void Start() {
         isEnemy = true;        
-        // bonusTimer = 0;
 	rbd = GetComponent<Rigidbody>();
 	player_script = GameObject.Find("Player").GetComponent<PlayerControl>();
     }
@@ -23,10 +22,11 @@ public class EnemyBehaviour : MonoBehaviour
     void Update () {
 	rbd.AddForce(0, 0, speed, ForceMode.Impulse);
 
-	if (player_script.bonus_in_use){
+	if (player_script.bonus_in_use) {
 	    TurnToBonus(4f);
 	} else {
 	    TurnToEnemy();
+	    // Change this to a texture or something that makes more sense
 	    GetComponent<Renderer>().material.SetColor("_Color", Color.red);
 	}
     }
@@ -35,7 +35,7 @@ public class EnemyBehaviour : MonoBehaviour
 	rbd.useGravity = false;
         isEnemy = false;
         myCollider.enabled = false;
-        // bonusTimer = seconds;
+	// Change this to a texture or something that makes more sense
 	GetComponent<Renderer>().material.SetColor("_Color", Color.green);
     }
 
@@ -48,10 +48,8 @@ public class EnemyBehaviour : MonoBehaviour
         if (other.tag == "Player") {
             if (player_script.bonus_in_use)
 		other.GetComponent<PlayerScore>().GetBonus();
-            else {
+            else 
 		other.GetComponent<PlayerHealth>().TakeHit();
-	    }
-                
 
             Die();
         }
