@@ -27,7 +27,7 @@ public class EnemyBehaviour : MonoBehaviour
 	} else {
 	    TurnToEnemy();
 	    // Change this to a texture or something that makes more sense
-	    GetComponent<Renderer>().material.SetColor("_Color", Color.red);
+	    GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.red);
 	}
     }
 
@@ -36,7 +36,7 @@ public class EnemyBehaviour : MonoBehaviour
         isEnemy = false;
         myCollider.enabled = false;
 	// Change this to a texture or something that makes more sense
-	GetComponent<Renderer>().material.SetColor("_Color", Color.green);
+	GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.green);
     }
 
     void TurnToEnemy() {

@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 91da456ac8f467e51a31647175ee5dbc, type: 2}
+  - {fileID: 2100000, guid: bcd097c21cf0b0847a3c5bb23f024338, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -108,7 +108,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEnemy: 0
-  bonusTimer: 0
   myCollider: {fileID: 8097920916642629999}
   speed: 2
 --- !u!54 &4624071739529032079
