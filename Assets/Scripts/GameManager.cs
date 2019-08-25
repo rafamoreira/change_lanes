@@ -19,18 +19,31 @@ public class GameManager : MonoBehaviour
       return _instance;
     }
   }
-  public float TotalScore;
 
-  public int enemyStatus;
+  public bool gameStarted;
+  float gameCountdown;
 
   void Awake()
   {
     DontDestroyOnLoad(gameObject);
   }
 
-  void Start()
+  void Start(){  
+    gameStarted = false;
+    gameCountdown = 2f;
+  }
+
+  void Update()
   {
-      enemyStatus = 0;
+    if(gameCountdown > 0)
+    {
+      gameCountdown -= Time.deltaTime;
+    }
+
+    if(!gameStarted && gameCountdown <= 0)
+    {
+      StartLevelRoutine();
+    }
   }
 
   public void GameOver()
@@ -38,20 +51,10 @@ public class GameManager : MonoBehaviour
       Debug.Log("game over");
   }
 
-    public bool EnemyIsEnemy()
-    {
-        return enemyStatus == 0;
-    }
-
-    void FlipEnemies()
-    {
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-
-        foreach (GameObject enemy in enemies)
-        {
-            enemy.GetComponent<EnemyBehaviour>().TurnToBonus(5);
-        }
-    }
+  void StartLevelRoutine()
+  {
+      gameStarted = true;
+  }
 }
 
 
