@@ -5,23 +5,19 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour
 {
     public int hearts;
-    public int initialHearts; 
 
-    void Start()
-    {
-        hearts = initialHearts;
+    void Start() {
+	isAlive = true;
+	hearts = 3;
     }
 
-    public void TakeHit()
-    {
-        Debug.Log("hit");
-        hearts -= 1; 
+    public void TakeHit() {
+        hearts--; 
 
-        if (hearts <= 0)
-        {
-           GameManager.Instance.GameOver(); 
+        if (hearts <= 0) {
+           GameManager.Instance.GameOver();
+	   isAlive = false;
         }
-
     }
 
 }

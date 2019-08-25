@@ -16,6 +16,7 @@ public class PlayerControl : MonoBehaviour {
     float startTime;
     Rigidbody rbd;
 
+    GameManager gamemanager;
 
     float initial_set_bonus_timer;
     
@@ -51,7 +52,7 @@ public class PlayerControl : MonoBehaviour {
 	if (bonus_in_use){
 	    bonusTimer -= Time.deltaTime;
 	}
-}
+    }
 
     
     void GetCurrentLane(int lane){
@@ -62,4 +63,12 @@ public class PlayerControl : MonoBehaviour {
 	else if (lane == 2)
 	    transform.position = new Vector3(rightLane.position.x, transform.position.y, transform.position.z);
     }
+
+    void OnTriggerEnter(Collider other) {
+	if (other.gameObject.tag == "Player"){
+	    Debug.Log("point");
+	}
+    }
 }
+
+

@@ -46,10 +46,12 @@ public class EnemyBehaviour : MonoBehaviour
 
     private void OnTriggerEnter(Collider other) {
         if (other.tag == "Player") {
-            if (isEnemy)
-                other.GetComponent<PlayerHealth>().TakeHit();
-            else
-                other.GetComponent<PlayerScore>().GetBonus();
+            if (player_script.bonus_in_use)
+		other.GetComponent<PlayerScore>().GetBonus();
+            else {
+		other.GetComponent<PlayerHealth>().TakeHit();
+	    }
+                
 
             Die();
         }
